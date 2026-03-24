@@ -32,7 +32,7 @@ This project demonstrates a hyper-converged infrastructure integrating VMware ES
 
 - VLAN 30 (Servers): Production segment for guest VMs with dedicated DHCP and firewall rules.
 ---
-## . Storage Architecture (TrueNAS SCALE)
+## 3. Storage Architecture (TrueNAS SCALE)
 
 ### 3.1 iSCSI Shared Storage
 - Protocol: iSCSI (Block-level).
@@ -44,9 +44,9 @@ This project demonstrates a hyper-converged infrastructure integrating VMware ES
 
 - Validation: Verified point-in-time recovery for critical virtual machine data.
 ---
-##4. Compute & High Availability (vCenter)
+## 4. Compute & High Availability (vCenter)
 
-###4.1 VMware vMotion
+### 4.1 VMware vMotion
 - Test: Successfully migrated running VMs between hosts with zero packet loss.
 
 - Status: Verified and functional across the management network.
@@ -62,7 +62,7 @@ This project demonstrates a hyper-converged infrastructure integrating VMware ES
 ### 5.1 The Problem
 Guest VMs on VLAN 30 could not obtain DHCP leases or ping the gateway (192.168.30.1), despite correct logical configuration.
 
-###5.2 Root Cause Analysis
+### 5.2 Root Cause Analysis
 - Environment: Nested virtualization (ESXi inside VMware Workstation).
 
 - Cause: The physical NIC driver on the Windows Host OS performs VLAN Tag Stripping, removing 802.1Q tags from frames before they reach the pfSense VM.
@@ -76,7 +76,7 @@ Guest VMs on VLAN 30 could not obtain DHCP leases or ping the gateway (192.168.3
 
 ---
 
-##6. Technologies & Tools Used
+## 6. Technologies & Tools Used
 - Hypervisors: VMware ESXi (Cluster), VMware Workstation (Host).
 
 - Orchestration: VMware vCenter Server.
