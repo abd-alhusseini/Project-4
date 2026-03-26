@@ -110,7 +110,24 @@ Guest VMs on VLAN 30 were unable to obtain DHCP leases or ping the gateway (192.
 
 ---
 
-## 6. Technologies & Tools Used
+---
+
+## 6. Lessons Learned & Technical Constraints
+
+### 6.1 The "Unresolved" VLAN Challenge
+During the testing phase of **VLAN 30 (Servers)**, a persistent connectivity issue was identified where Guest VMs could not reach the gateway or obtain DHCP leases. After deep packet inspection (DPI) and configuration audits, the following was concluded:
+
+* **Finding:** The issue is a well-documented limitation of **Nested Virtualization** on Windows-based hosts. The physical NIC drivers on the Host OS perform **VLAN Tag Stripping**, removing 802.1Q tags before they reach the virtualized pfSense interface.
+* **Verification:** vCenter Port Group tagging and pfSense VLAN configurations were validated as 100% correct. Temporary bypass tests confirmed that the logic holds, but the hardware-software abstraction layer of VMware Workstation on Windows acted as the bottleneck.
+* **Takeaway:** This experience provided deep insights into **Layer 2 frame manipulation** and the critical importance of hardware compatibility in software-defined networking (SDN).
+
+### 6.2 Future Improvements
+* **Bare-Metal Deployment:** Transitioning the lab to a dedicated physical server (Type-1 Hypervisor) to eliminate Host OS driver interference.
+* **Advanced Storage:** Implementing Multipathing (MPIO) for iSCSI traffic to further optimize storage performance and redundancy.
+
+---
+
+## 7. Technologies & Tools Used
 
 - Hypervisors: VMware ESXi (Cluster), VMware Workstation (Host).
 
